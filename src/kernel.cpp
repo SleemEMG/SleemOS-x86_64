@@ -33,8 +33,8 @@ static volatile uint64_t limineendmarkings[] = LIMINE_REQUESTS_END_MARKER;
 
 
 const char* comans;
-int peniscum5000 = 0;
-int peniscum6000;
+int leftover1 = 0; // censored
+int leftover2; // censored
 int overwarn = 0;
 volatile uint32_t tiks = 0;
 uint64_t hhdmoffset;
@@ -65,13 +65,13 @@ void uint32tonumber(uint32_t number) {
   table[counter] = number % 10 + '0';
   counter++;
   number = number / 10; // I FUCKING HATE CPP
-  // ill fucking jump off a bridge if it doesnt work next try
+  // ill fucking CENSORED if it doesnt work next try
   }
   int counterminus1 = counter - 1; // no fucking shit
   while(counterminus1 >= 0) {
   pleaseputacharacter(table[counterminus1]);
-  counterminus1 --; // im ENDING IT if this doesnt work
-  // IM GONNA SERIOUSLY FUCKING DO IT
+  counterminus1 --; // im CENSORED if this doesnt work
+  // IM GONNA SERIOUSLY FUCKING CENSORED
   }
 }
  /*   void uint32tohex(uint32_t hex) {
@@ -90,7 +90,7 @@ volatile int readindia = 0;
 
 char givcharacter() {
   while (readindia == writeindia) {
-  hal_idle(); // Penis.
+  hal_idle(); // CENSORED.
   }
   char okiassignedit = storag[readindia];
   readindia = (readindia + 1) & 63;
@@ -114,29 +114,29 @@ int FUCKTHISBULLSHIT = 1;
 int lengthofuparrowshit = 0;
 
 void typepls() {
-  peniscum6000 = 0;
+  leftover2 = 0;
   while (1) {
     char userinputprobably = givcharacter();
-    if(userinputprobably == '\n' && peniscum5000 == 1) {
-      peniscum5000 = 0;
+    if(userinputprobably == '\n' && leftover1 == 1) {
+      leftover1 = 0;
       continue;
     }
-    peniscum5000 = 0;
-    if(peniscum6000 == 1) {
+    leftover1 = 0;
+    if(leftover2 == 1) {
       if(userinputprobably == '[') {
-        peniscum6000 = 2;
+        leftover2 = 2;
         continue;
       }
       else if(userinputprobably == '\x1b') {
         continue;
       }
       else {
-        peniscum6000 = 0;
+        leftover2 = 0;
       }
     }
-    else if (peniscum6000 == 2) {
+    else if (leftover2 == 2) {
       if(userinputprobably == 'A') {
-        peniscum6000 = 0;
+        leftover2 = 0;
         if(FUCKTHISBULLSHIT == 1) {
           lengthofuparrowshit = 0;
           while(uparrowshit[lengthofuparrowshit] != '\0') {
@@ -153,14 +153,14 @@ void typepls() {
         continue;
       }
       else if(userinputprobably >= 0x40 && userinputprobably <= 0x7E) {
-        peniscum6000 = 0;
+        leftover2 = 0;
         continue;
       }
       else if(userinputprobably >= 0x20 && userinputprobably <= 0x3F) {
         continue;
       }
       else {
-        peniscum6000 = 0;
+        leftover2 = 0;
       }
     }
     if (userinputprobably == '\n' || userinputprobably == '\r') {
@@ -173,7 +173,7 @@ void typepls() {
       howmanycharacterscurrently = 0;
       overwarn = 0;
       if (userinputprobably == '\r') {
-        peniscum5000 = 1;
+        leftover1 = 1;
       }
       return;
     }
@@ -184,7 +184,7 @@ void typepls() {
       }
     }
     else if (userinputprobably == '\x1b') {
-      peniscum6000 = 1;
+      leftover2 = 1;
     }
     else if (howmanycharacterscurrently < 255) {
       maxinput[howmanycharacterscurrently] = userinputprobably;
@@ -326,7 +326,7 @@ int returnvalue; // commit
       }
 
       uartcharacterplacement("\r\n"); // now i have FUCKING LINKER ERRORS IM GONNA HAVE AFUCKING MENTAL BREAKDOWN
- } // IM FUCKING ENDING IT IT DIDNT BOOT
+ } // IM FUCKING CENSORED IT DIDNT BOOT
     else if (echolaid(comans, "echo ") == 1) {
       uartcharacterplacement("\r\n");
       uartcharacterplacement(comans + 5);
