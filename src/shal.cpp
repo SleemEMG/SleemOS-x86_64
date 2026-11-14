@@ -131,7 +131,7 @@ void hal_isitgenuineamdorintelsomething(char* cpuidbuffersss) {
     cpuidbuffersss[48] = 0;
 }
 
-static inline uint8_t readingportshitt(uint16_t portss) { uint8_t virginity; asm volatile("inb %1, %0" : "=a"(virginity) : "Nd"(portss)); return virginity; }
+static inline uint8_t readingportshitt(uint16_t portss) { uint8_t vcensored; asm volatile("inb %1, %0" : "=a"(vcensored) : "Nd"(portss)); return vcensored; } // censored
 static inline void sendingportshit(uint16_t portss2, uint8_t valuingshit) { asm volatile("outb %0, %1" : : "a"(valuingshit), "Nd"(portss2)); }
 
 void hal_resettingshit() {
