@@ -40,3 +40,8 @@ extern uint8_t* framebufferingaddress;
 extern uint64_t pitchingshit;
 extern uint64_t wih;
 extern uint64_t high;
+void hal_sfs_readsectoringshit(uint32_t elballsa, uint16_t* bufferingshit2);
+extern void hal_sfs_writingsectoringshit(uint32_t elballsa2, uint16_t* bufferingshit2);
+extern uint32_t hal_sfs_identifyingshit(uint16_t* bufferingshit2);
+extern "C" void* memset(void* dest, int val, size_t len);
+extern void hal_cursoringsuppings(int eye8);

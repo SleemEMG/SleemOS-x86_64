@@ -1,10 +1,13 @@
-// Sleem Operating System x86_64 1.0 BETA (informally SleemOS)
-// BITNXG 1.0
+// Sleem Operating System x86_64 2.0 (informally SleemOS)
+// BITNXG 2.0
 // credits: v3x, osdev (credits for software used outside this file in other files)
 
 #include <stdint.h>
 #include "../include/shal.h"
 #include "../include/strcmp.h"
+#include "../include/sleemfs.h"
+#include "../include/sleemint.h"
+#include "../include/badapplecpp.h"
 #define newline uartcharacterplacement("\r\n")
 #include "../include/limine.h"
 __attribute__((used, section(".limine_requests")))
@@ -33,8 +36,8 @@ static volatile uint64_t limineendmarkings[] = LIMINE_REQUESTS_END_MARKER;
 
 
 const char* comans;
-int peniscum5000 = 0;
-int peniscum6000;
+int censored5000 = 0;
+int censored6000;
 int overwarn = 0;
 volatile uint32_t tiks = 0;
 uint64_t hhdmoffset;
@@ -65,13 +68,13 @@ void uint32tonumber(uint32_t number) {
   table[counter] = number % 10 + '0';
   counter++;
   number = number / 10; // I FUCKING HATE CPP
-  // ill fucking jump off a bridge if it doesnt work next try
+  // ill fucking CENSORED if it doesnt work next try
   }
   int counterminus1 = counter - 1; // no fucking shit
   while(counterminus1 >= 0) {
   pleaseputacharacter(table[counterminus1]);
-  counterminus1 --; // im ENDING IT if this doesnt work
-  // IM GONNA SERIOUSLY FUCKING DO IT
+  counterminus1 --; // im CENSORED if this doesnt work
+  // IM GONNA SERIOUSLY FUCKING CENSORED
   }
 }
  /*   void uint32tohex(uint32_t hex) {
@@ -90,7 +93,7 @@ volatile int readindia = 0;
 
 char givcharacter() {
   while (readindia == writeindia) {
-  hal_idle(); // Penis.
+  hal_idle(); 
   }
   char okiassignedit = storag[readindia];
   readindia = (readindia + 1) & 63;
@@ -114,29 +117,29 @@ int FUCKTHISBULLSHIT = 1;
 int lengthofuparrowshit = 0;
 
 void typepls() {
-  peniscum6000 = 0;
+  censored6000 = 0;
   while (1) {
     char userinputprobably = givcharacter();
-    if(userinputprobably == '\n' && peniscum5000 == 1) {
-      peniscum5000 = 0;
+    if(userinputprobably == '\n' && censored5000 == 1) {
+      censored5000 = 0;
       continue;
     }
-    peniscum5000 = 0;
-    if(peniscum6000 == 1) {
+    censored5000 = 0;
+    if(censored6000 == 1) {
       if(userinputprobably == '[') {
-        peniscum6000 = 2;
+        censored6000 = 2;
         continue;
       }
       else if(userinputprobably == '\x1b') {
         continue;
       }
       else {
-        peniscum6000 = 0;
+        censored6000 = 0;
       }
     }
-    else if (peniscum6000 == 2) {
+    else if (censored6000 == 2) {
       if(userinputprobably == 'A') {
-        peniscum6000 = 0;
+        censored6000 = 0;
         if(FUCKTHISBULLSHIT == 1) {
           lengthofuparrowshit = 0;
           while(uparrowshit[lengthofuparrowshit] != '\0') {
@@ -153,14 +156,14 @@ void typepls() {
         continue;
       }
       else if(userinputprobably >= 0x40 && userinputprobably <= 0x7E) {
-        peniscum6000 = 0;
+        censored6000 = 0;
         continue;
       }
       else if(userinputprobably >= 0x20 && userinputprobably <= 0x3F) {
         continue;
       }
       else {
-        peniscum6000 = 0;
+        censored6000 = 0;
       }
     }
     if (userinputprobably == '\n' || userinputprobably == '\r') {
@@ -173,7 +176,7 @@ void typepls() {
       howmanycharacterscurrently = 0;
       overwarn = 0;
       if (userinputprobably == '\r') {
-        peniscum5000 = 1;
+        censored5000 = 1;
       }
       return;
     }
@@ -184,7 +187,7 @@ void typepls() {
       }
     }
     else if (userinputprobably == '\x1b') {
-      peniscum6000 = 1;
+      censored6000 = 1;
     }
     else if (howmanycharacterscurrently < 255) {
       maxinput[howmanycharacterscurrently] = userinputprobably;
@@ -218,12 +221,12 @@ int returnvalue; // commit
 
   void termcommandsssss() {
     if (strcmp(comans, "help") == 0) {
-      uartcharacterplacement("\r\nCommands: help, neofetch, clear, uptime, echo, write (SleemFS, TEMPORARILY NOT IN OS), touch (SleemFS, TEMPORARILY NOT IN OS), cat (SleemFS, TEMPORARILY NOT IN OS), ls (SleemFS, TEMPORARILY NOT IN OS), rm (SleemFS, TEMPORARILY NOT IN OS), edit (SleemFS, TEMPORARILY NOT IN OS), panik, reboot, run (SleemInt x86_64, TEMPORARILY NOT IN OS), hexdump (SleemFS, TEMPORARILY NOT IN OS), badapple (TEMPORARILY NOT IN OS)\r\n");
+      uartcharacterplacement("\r\nCommands: help, neofetch, clear, uptime, echo, write (SleemFS), touch (SleemFS), cat (SleemFS), ls (SleemFS), rm (SleemFS), edit (SleemFS), panik, reboot, run (SleemInt x86_64), hexdump (SleemFS), badapple\r\n");
     }
     else if (strcmp(comans, "neofetch") == 0) {
       char cpuname[49];
 
-      uartcharacterplacement("\r\nOS: SleemOS x86_64 \r\nBuild: 1.0 \r\nKernel: BITNXG 1.0 ");
+      uartcharacterplacement("\r\nOS: SleemOS x86_64 \r\nBuild: 2.0 \r\nKernel: BITNXG 2.0 ");
       uartcharacterplacement("\r\nCPU: ");
       hal_isitgenuineamdorintelsomething(cpuname);
       uartcharacterplacement(cpuname);
@@ -235,7 +238,7 @@ int returnvalue; // commit
     else if (strcmp(comans, "") ==  0) {
         uartcharacterplacement("\r\n");
     }
-/*   else if(echolaid(comans, "touch ") == 1) {
+  else if(echolaid(comans, "touch ") == 1) {
       nameofshit = 6;
       if(comans[nameofshit] == '\0') {
         uartcharacterplacement("\r\n");
@@ -243,6 +246,7 @@ int returnvalue; // commit
         uartcharacterplacement("\r\n");
 
       }
+      
       else {
       returnvalue = createshit(comans + nameofshit);
       uartcharacterplacement("\r\n");
@@ -263,8 +267,6 @@ int returnvalue; // commit
       badappl();
     }
 
-
-
     else if (echolaid(comans, "ls ") == 1) {
       if(strcmp(comans + 3, "-l") == 0) {
         listshit(1);
@@ -273,6 +275,7 @@ int returnvalue; // commit
         listshit(0);
     }
   }
+
     else if (echolaid(comans, "cat ") == 1) {
       nameofshit = 4;
       readshit();
@@ -289,19 +292,20 @@ int returnvalue; // commit
               if(returnvalue == 1) {
       saveshit();
               }
+
  // this is fucking evil bro
       }
       else if (echolaid(comans, "hexdump ") == 1) {
         nameofshit = 8;
         hexshitdump();
     }    
-    */
+
       else if (strcmp(comans, "reboot") == 0) {
         uartcharacterplacement("\r\n");
         hal_resettingshit();
         while(1);
       } 
-      /*
+
       else if (echolaid(comans, "rm ") == 1) {
         nameofshit = 3;
         returnvalue = removeshit();
@@ -310,7 +314,7 @@ int returnvalue; // commit
         }
         uartcharacterplacement("\r\n");
       }
-    */
+
     else if (strcmp(comans, "uptime") == 0) {
       uint32_t localtiks = tiks;
       uartcharacterplacement("\r\nUptime: "); // this better fucking work OR FUCKINE ELSE
@@ -325,8 +329,8 @@ int returnvalue; // commit
         uartcharacterplacement("s");
       }
 
-      uartcharacterplacement("\r\n"); // now i have FUCKING LINKER ERRORS IM GONNA HAVE AFUCKING MENTAL BREAKDOWN
- } // IM FUCKING ENDING IT IT DIDNT BOOT
+      uartcharacterplacement("\r\n"); // now i have FUCKING LINKER ERRORS IM GONNA HAVE AFUCKING CENSORED
+ } // IM FUCKING CENSORED IT DIDNT BOOT
     else if (echolaid(comans, "echo ") == 1) {
       uartcharacterplacement("\r\n");
       uartcharacterplacement(comans + 5);
@@ -335,7 +339,6 @@ int returnvalue; // commit
   else if (strcmp(comans, "panik") == 0) {
     __asm volatile ("ud2");
   }
-  /*
   else if (echolaid(comans, "edit ") == 1) {
     nameofshit = 5;
     if(findshit(comans + 5) == -1) {
@@ -358,7 +361,6 @@ int returnvalue; // commit
     
       }
   }
-     */
     else {
       uartcharacterplacement("\r\nNot implemented.\r\n");
     }
@@ -376,8 +378,8 @@ extern "C" void sleemmf() {
   high = efbee->height;
   hal_clearingshit();
   uartcharacterplacement(
-      "Welcome to SleemOS x86_64 1.0!\r\n");
- // checkif();
+      "Welcome to SleemOS x86_64 2.0!\r\n");
+  checkif();
   hhdmoffset = ehehdeem.response->offset;
   hal_initializinginterrupts();
   while(1) {

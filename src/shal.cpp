@@ -18,6 +18,8 @@ uint8_t* framebufferingaddress;
 uint64_t pitchingshit;
 uint64_t wih;
 uint64_t high;
+static bool isshiftheldornot;
+static volatile bool uparrowornot = false;
 
 static const uint32_t redgreenblueorsomeshi[16] = {
     0x000000, 0x0000AA, 0x00AA00, 0x00AAAA,
@@ -26,7 +28,7 @@ static const uint32_t redgreenblueorsomeshi[16] = {
     0xFF5555, 0xCF9FFF, 0xFFFF55, 0xFFFFFF
 };
 
-/* All credits to GCC */
+/* All credits to GCC for memset and memcpy*/
 #include <stddef.h>
 extern "C" {
 void *
@@ -37,6 +39,18 @@ char *d = (char*)dest;
 const char *s = (const char*)src; // fixing
   while (len--)
     *d++ = *s++;
+  return dest;
+}
+}
+
+#include <stddef.h>
+extern "C" {
+void *
+memset (void *dest, int val, size_t len)
+{
+  unsigned char *ptr = (unsigned char*)dest; // fuck you CPP20
+  while (len-- > 0)
+    *ptr++ = val;
   return dest;
 }
 }
@@ -131,8 +145,76 @@ void hal_isitgenuineamdorintelsomething(char* cpuidbuffersss) {
     cpuidbuffersss[48] = 0;
 }
 
-static inline uint8_t readingportshitt(uint16_t portss) { uint8_t virginity; asm volatile("inb %1, %0" : "=a"(virginity) : "Nd"(portss)); return virginity; }
+static inline uint8_t readingportshitt(uint16_t portss) { uint8_t vcensored; asm volatile("inb %1, %0" : "=a"(vcensored) : "Nd"(portss)); return vcensored; }
 static inline void sendingportshit(uint16_t portss2, uint8_t valuingshit) { asm volatile("outb %0, %1" : : "a"(valuingshit), "Nd"(portss2)); }
+static inline uint16_t twoxreadingportshitt(uint16_t portss) { uint16_t vcensored; asm volatile("inw %1, %0" : "=a"(vcensored) : "Nd"(portss)); return vcensored; }
+static inline void twoxsendingportshit(uint16_t portss2, uint16_t valuingshit) { asm volatile("outw %0, %1" : : "a"(valuingshit), "Nd"(portss2)); }
+
+void hal_sfs_readsectoringshit(uint32_t elballsa, uint16_t* bufferingshit2) { // its lba
+    while(readingportshitt(0x1F7) & 0x80) {}
+    sendingportshit(0x1F6, 0xE0 | ((elballsa >> 24) & 0x0F));
+    sendingportshit(0x1F2, 1);
+    sendingportshit(0x1F3, elballsa & 0xFF);
+    sendingportshit(0x1F4, (elballsa >> 8) & 0xFF);
+    sendingportshit(0x1F5, (elballsa >> 16) & 0xFF);
+    sendingportshit(0x1F7, 0x20);
+    uint8_t statusingshit = readingportshitt(0x1F7);
+    while((statusingshit & 0x80) || !(statusingshit & 0x08)) {
+        statusingshit = readingportshitt(0x1F7);
+        if(statusingshit & 0x01) {
+            return;
+        }
+    }
+    for(int eye1milion = 0; eye1milion < 256; eye1milion++) {
+        bufferingshit2[eye1milion] = twoxreadingportshitt(0x1F0);
+    }
+}
+
+uint32_t hal_sfs_identifyingshit(uint16_t* bufferingshit2) { // its lba
+    while(readingportshitt(0x1F7) & 0x80) {}
+    sendingportshit(0x1F6, 0xA0);
+    sendingportshit(0x1F2, 0);
+    sendingportshit(0x1F3, 0);
+    sendingportshit(0x1F4, 0);
+    sendingportshit(0x1F5, 0);
+    sendingportshit(0x1F7, 0xEC);
+    if(readingportshitt(0x1F7) == 0) {
+    return 0;
+}
+    uint8_t statusingshit = readingportshitt(0x1F7);
+    while((statusingshit & 0x80) || !(statusingshit & 0x08)) {
+        statusingshit = readingportshitt(0x1F7);
+        if(statusingshit & 0x01) {
+            return 0; // ya proshol sakupen circles
+        }
+    }
+    for(int eye1milion = 0; eye1milion < 256; eye1milion++) {
+        bufferingshit2[eye1milion] = twoxreadingportshitt(0x1F0);
+    }
+    return bufferingshit2[60] | ((uint32_t)bufferingshit2[61] << 16);
+}
+
+void hal_sfs_writingsectoringshit(uint32_t elballsa2, uint16_t* bufferingshit2) { // its lba
+    while(readingportshitt(0x1F7) & 0x80) {}
+    sendingportshit(0x1F6, 0xE0 | ((elballsa2 >> 24) & 0x0F));
+    sendingportshit(0x1F2, 1);
+    sendingportshit(0x1F3, elballsa2 & 0xFF);
+    sendingportshit(0x1F4, (elballsa2 >> 8) & 0xFF);
+    sendingportshit(0x1F5, (elballsa2 >> 16) & 0xFF);
+    sendingportshit(0x1F7, 0x30);
+    uint8_t statusingshit = readingportshitt(0x1F7);
+    while((statusingshit & 0x80) || !(statusingshit & 0x08)) {
+        statusingshit = readingportshitt(0x1F7);
+        if(statusingshit & 0x01) {
+            return;
+        }
+    }
+    for(int eye1milion = 0; eye1milion < 256; eye1milion++) {
+    twoxsendingportshit(0x1F0, bufferingshit2[eye1milion]);
+    }
+    sendingportshit(0x1F7, 0xE7);
+    while(readingportshitt(0x1F7) & 0x80) {}
+}
 
 void hal_resettingshit() {
     while(readingportshitt(0x64) & 2) {}
@@ -144,6 +226,13 @@ void hal_idle() {
     asm volatile("hlt");
 }
 
+void hal_cursoringsuppings(int eye8) {
+    rows = rows - eye8;
+    if(rows < 0) {
+    rows = 0;
+    }
+    colums = 0;
+}
 
 // idt time (idt was made to torture people)
 
@@ -230,6 +319,7 @@ void hal_tikshandelr(frejm* f) {
     sendingportshit(0x20, 0x20);
 }
 
+
 char hal_scat(uint8_t codess) { // scan code ascii to yes it is deliberate
     static const char scancodingshit[] =
     "\0\0" "1234567890-=\b"
@@ -237,11 +327,22 @@ char hal_scat(uint8_t codess) { // scan code ascii to yes it is deliberate
     "\0asdfghjkl;'`"
     "\0\\zxcvbnm,./"
     "\0*\0 ";
+    static const char shiftilingsscancodingshit[] =
+    "\0\0" "!@#$%^&*()_+\b"
+    "\tQWERTYUIOP{}\n"
+    "\0ASDFGHJKL:\"~"
+    "\0|ZXCVBNM<>?"
+    "\0*\0 ";
     if(codess >= sizeof(scancodingshit) - 1) {
         return '\0';
     }
     else {
+    if(isshiftheldornot == true) {
+        return shiftilingsscancodingshit[codess];
+    }
+    else {
         return scancodingshit[codess];
+    }  
     }
 }
 
@@ -261,6 +362,43 @@ void hal_remappingshit() {
 __attribute__((interrupt))
 void hal_keyboardhandelr(frejm* f) {
     uint8_t readingkeyboardshit = readingportshitt(0x60);
+    if(readingkeyboardshit == 0x2A || readingkeyboardshit == 0x36) {
+    isshiftheldornot = true;
+    sendingportshit(0x20, 0x20);
+    return;
+    }
+    if(readingkeyboardshit == 0xAA || readingkeyboardshit == 0xB6) {
+    isshiftheldornot = false;
+    sendingportshit(0x20, 0x20);
+    return;
+    }
+    if(readingkeyboardshit == 0xE0) {
+    uparrowornot = true;
+    sendingportshit(0x20, 0x20);
+    return;
+    }
+    if(uparrowornot) {
+        int nextshit = (writeindia + 1) % 64;
+        uparrowornot = false;
+            if(readingkeyboardshit == 0x48) {
+                if(nextshit != readindia) {
+                    storag[writeindia] = '\x1b';
+                    writeindia = nextshit;
+                }
+                nextshit = (writeindia + 1) % 64;
+                if(nextshit != readindia) {
+                    storag[writeindia] = '[';
+                    writeindia = nextshit;
+                }
+                nextshit = (writeindia + 1) % 64;
+                if(nextshit != readindia) {
+                    storag[writeindia] = 'A';
+                    writeindia = nextshit;
+                }
+    }
+    sendingportshit(0x20, 0x20);
+    return;
+    }
     int nextshit = (writeindia + 1) % 64;
     if(nextshit != readindia) {
     char readingkeyboardshit2 = hal_scat(readingkeyboardshit);
