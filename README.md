@@ -91,7 +91,8 @@ SleemInt (or Sleem (Programming) Interpreter) is SleemOS's programming interpret
 2. `output(vga, loop)` Outputs anything after it to VGA. Same idea as before but loops every time you press enter until you type exit.
 3. `execute(commands)` Executes any command after it.
 4. `sleep(seconds/minutes)` Waits for any given amount of time you put into it, as long as it's in seconds/minutes.
-It supports semicolons.
+<br>
+SleemInt supports semicolons.
 That is all of the summary about SleemInt.
 
 
